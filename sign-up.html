@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        #demo {
+            width: 400px;
+            height: 570px;
+            border: 1px solid black;
+            padding-top: 50px;
+            padding: 30px 20px;
+            border: 1px solid rgb(128, 127, 127);
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgb(128, 127, 127);
+        }
+
+        #demo1 {
+            display: flex;
+            justify-content: center;
+            padding-top: 40px;
+        }
+
+        #demo2 {
+            align-items: center;
+        }
+
+        #username.error {
+            border: 2px solid red;
+            box-shadow: 3px 2px red;
+        }
+
+        #email.error {
+            border: 2px solid red;
+            box-shadow: 3px 2px red;
+        }
+
+        #password.error {
+            border: 2px solid red;
+            box-shadow: 3px 2px red;
+        }
+
+        #username.valid {
+            border: 2px solid green;
+        }
+
+        #email.valid {
+            border: 2px solid green;
+        }
+
+        #password.valid {
+            border: 2px solid green;
+        }
+
+        .error-message {
+            color: red;
+            padding-top: 2px;
+        }
+
+    </style>
+    <script>
+        function validateUsername() {
+            var usernameInput = document.getElementById('username');
+            var errorMessage = document.getElementById('error-message-username');
+
+            if (usernameInput.value.length < 3 || usernameInput.value.length > 22) {
+                usernameInput.classList.remove('valid');
+                usernameInput.classList.add('error');
+                errorMessage.textContent = "Username must be between 3 and 22 characters.";
+            } else {
+                usernameInput.classList.remove('error');
+                usernameInput.classList.add('valid');
+                errorMessage.textContent = "";
+            }
+        }
+
+        function validateEmail() {
+            var emailInput = document.getElementById('email');
+            var errorMessage = document.getElementById('error-message-email');
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(emailInput.value)) {
+                emailInput.classList.remove('valid');
+                emailInput.classList.add('error');
+                errorMessage.textContent = "Please enter a valid email address.";
+            } else {
+                emailInput.classList.remove('error');
+                emailInput.classList.add('valid');
+                errorMessage.textContent = "";
+            }
+        }
+
+        function validatePass() {
+            var passwordInput = document.getElementById('password');
+            var errorMessage = document.getElementById('error-message-password');
+
+            if (passwordInput.value.length < 3 || passwordInput.value.length > 9) {
+                passwordInput.classList.remove('valid');
+                passwordInput.classList.add('error');
+                errorMessage.textContent = "Password must have atleast 8 characters that include at least 1 lowercase character,1 uppercase character,1 number and 1 special character.";
+            } else {
+                passwordInput.classList.remove('error');
+                passwordInput.classList.add('valid');
+                errorMessage.textContent = "";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form id="signupForm">
+        <div id="demo1">
+            <div id="demo">
+                <center>
+                    <h2 id="demo2">Sign Up</h2>
+                </center><br>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="usernameHelp"
+                        oninput="validateUsername()">
+                    <p id="error-message-username" class="error-message"></p>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                        oninput="validateEmail()">
+                    <p id="error-message-email" class="error-message"></p>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" oninput="validatePass()">
+                    <p id="error-message-password" class="error-message"></p>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword">
+                </div>
+                <button type="button" onclick="validateUsername(); validateEmail(); validatePass();"
+                    class="btn btn-primary">SIGN UP</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
